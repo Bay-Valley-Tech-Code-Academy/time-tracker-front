@@ -4,6 +4,7 @@ import CreateAccountPage from './pages/create-account'
 import LoginPage from './pages/login'
 import MainLayout from './pages/main/main-layout'
 import TimeTrackerPage from './pages/main/time-tracker'
+import MyAccountPage from './pages/main/my-account'
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
 
       <Route element={<MainLayout />}>
         <Route path="time-tracker" element={<TimeTrackerPage />} />
+
+        <Route path="my-account" element={<MyAccountPage />}></Route>
       </Route>
     </Routes>
   )
