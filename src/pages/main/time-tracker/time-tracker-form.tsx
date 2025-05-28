@@ -1,6 +1,10 @@
-// Form with 5 fields:
-// summary, project (dropdown), date, timestart, timeend, submit button
+import Button from "../../../components/common/button/button";
+
 const TimeTrackerForm = () => {
+    const handleSubmitClick = () => {
+        console.log("Submit button clicked");
+    };
+
   return (
     <form className="time-tracker-form">
       <div className="form-group">
@@ -57,10 +61,9 @@ const TimeTrackerForm = () => {
         />
       </div>
 
-        {/* Perhaps this should be a common component */}
-      <button type="submit" className="submit-button">
+      <Button type="submit" onClick={handleSubmitClick} className="submit-button">
         Submit
-      </button>
+      </Button>
     </form>
   );
 };
