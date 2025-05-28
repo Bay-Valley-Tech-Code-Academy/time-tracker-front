@@ -46,7 +46,6 @@ const TimeTrackerTable: React.FC = () => {
             <button className="time-tracker-table-delete-button">Delete</button>
           </td>
         </tr>
-        {/* Add more hard coded rows as needed */}
       </tbody>
     </table>
   );
