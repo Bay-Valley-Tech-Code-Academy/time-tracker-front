@@ -1,11 +1,13 @@
-import { Link } from "react-router";
+
+import TimeTrackerForm from "./time-tracker-form";
+import TimeTrackerTable from "./time-tracker-table";
+
 
 const TimeTrackerPage = () => {
   return (
-    <div>
-      <h1>Time Tracker Page</h1>
-
-      <Link to="/my-account">my Account Page</Link>
+    <div className="time-tracker-content">
+      <TimeTrackerForm />
+      <TimeTrackerTable />
     </div>
   );
 };
