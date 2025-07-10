@@ -1,0 +1,9 @@
+form {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
