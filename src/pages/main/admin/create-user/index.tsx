@@ -1,13 +1,17 @@
+import React, {useState} from "react";
 import UserTable from "./user-table";
 
 const CreateUserPage = () => {
-  function toggleDialog(){
-    
+  interface DialogProps {
+    onSubmit: () => void;
   }
-  return (
+
+  const DialogComponent: React.FC<DialogProps> = ({ onSubmit }) => {
+    return (
     <div>
-      <h1>Create User Page</h1>
-      <dialog id="formDialog">
+      <div className="dialog-overlay">
+        <h1>Add User</h1>
+        <div className="dialog-content">
         <form method="dialog">
           <div>
             <label htmlFor="name">Name</label>
@@ -17,15 +21,34 @@ const CreateUserPage = () => {
             <label htmlFor="email">Email</label>
             <input type="email" id="email" name="email" required></input>
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" onClick={onSubmit}>Submit</button>
         </form>
-      </dialog>
+        </div>
+      </div>
 
-      <button type="button" onClick={toggleDialog}>Create User</button>
-      
-      <UserTable />
+    <button type="button" onClick={toggleDialog}>Create User</button> 
+    <UserTable />
     </div>
-  );
-};
+    )
+  };
 
+  function toggleDialog(){
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const handleOpenDialog = () => {
+      setIsDialogOpen(true);
+    };
+
+    const handleCloseDialog = () => {
+      setIsDialogOpen(false);
+    };
+
+    return(
+      <div>
+        <button onClick={handleOpenDialog}>Create User</button>
+        {isDialogOpen && <DialogComponent onSubmit={handleCloseDialog} />}
+      </div>
+    )
+  }
+};
 export default CreateUserPage;
