@@ -11,7 +11,24 @@ const accountSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 12
+        minlength: 12,
+        validate: [
+            {
+                validator: function (value) {
+                    return /[!@#$%^&*(),.?":{}|<>]/.test(value);
+                },
+                message: 'Password must contain at least one special character.'
+            },
+            {
+                validator: function (value) {
+                    const blacklist = ['password', '123', '1234', '12345', '123456'];
+                    const lowerValue = value.toLowerCase();
+
+                    return !blacklist.some(banned => lowerValue.includes(banned));
+                },
+                message: 'Password cannot contain any of these words: password, 123, 1234, 12345, 123456'
+            }
+        ]
     }
 });
 
