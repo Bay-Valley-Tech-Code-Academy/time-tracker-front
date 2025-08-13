@@ -1,26 +1,70 @@
 import Button from "../../../components/common/button/button";
+import React, { useState } from "react";
+import type { TimeTrackerFormProps } from "./types";
 
-const TimeTrackerForm = () => {
-    const handleSubmitClick = () => {
-        console.log("Submit button clicked");
-    };
+const TimeTrackerForm: React.FC<TimeTrackerFormProps> = ({ onSubmit }) => {
+  const [form, setForm] = useState({
+    summary: "Fixed summary text",
+    project: "alpha",
+    date: "2025-05-21",
+    startTime: "08:00",
+    endTime: "16:00",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const { summary, project, date, startTime, endTime } = form;
+
+    const startDateTime = new Date(`${date}T${startTime}:00`);
+    const endDateTime = new Date(`${date}T${endTime}:00`);
+
+    if (endDateTime <= startDateTime) {
+      alert("End time must be after start time");
+      return;
+    }
+
+    onSubmit({
+      summary,
+      project,
+      date: new Date(date),
+      startTime: startDateTime,
+      endTime: endDateTime,
+    });
+
+    setForm({ summary: "", project: "", date: "", startTime: "", endTime: "" });
+  };
 
   return (
-    <form className="time-tracker-form">
+    <form className="time-tracker-form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="summary">Summary</label>
         <input
           type="text"
           id="summary"
           name="summary"
-          defaultValue="Fixed summary text"
+          value={form.summary}
+          onChange={handleChange}
           className="form-control"
         />
       </div>
 
       <div className="form-group">
         <label htmlFor="project">Project</label>
-        <select id="project" name="project" className="form-control" defaultValue="beta">
+        <select
+          id="project"
+          name="project"
+          value={form.project}
+          onChange={handleChange}
+          className="form-control"
+        >
           <option value="">Select a project</option>
           <option value="alpha">Alpha</option>
           <option value="beta">Beta</option>
@@ -34,7 +78,8 @@ const TimeTrackerForm = () => {
           type="date"
           id="date"
           name="date"
-          defaultValue="2025-05-21"
+          value={form.date}
+          onChange={handleChange}
           className="form-control"
         />
       </div>
@@ -45,7 +90,8 @@ const TimeTrackerForm = () => {
           type="time"
           id="startTime"
           name="startTime"
-          defaultValue="09:00"
+          value={form.startTime}
+          onChange={handleChange}
           className="form-control"
         />
       </div>
@@ -56,12 +102,13 @@ const TimeTrackerForm = () => {
           type="time"
           id="endTime"
           name="endTime"
-          defaultValue="17:00"
+          value={form.endTime}
+          onChange={handleChange}
           className="form-control"
         />
       </div>
 
-      <Button type="submit" onClick={handleSubmitClick} className="submit-button">
+      <Button type="submit" className="submit-button">
         Submit
       </Button>
     </form>
@@ -69,3 +116,4 @@ const TimeTrackerForm = () => {
 };
 
 export default TimeTrackerForm;
+
