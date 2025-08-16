@@ -11,13 +11,26 @@ const generateToken = (id) => {
 //@desc    Get account
 //@route   GET /api/v1/accounts
 //@access  Public
-/*const getAccount = async (req, res) => {
+const getAccount = async (req, res) => {
     try {
+        const { email } = req.query;
+
+        //Checks if current account exists
+        const account = await Account.findOne({ email });
+        if (!account) {
+            return res.status(404).json({ message: 'Email not found!' });
+        }
+
+        //Excludes sensitive information
+        res.status(200).json({ 
+            _id: account._id,
+            email: account.email
+        });
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Unable to get account' });
     }
-};*/
+};
 
 //@desc    Register a new account
 //@route   POST /api/accounts
@@ -47,7 +60,7 @@ const registerAccount = async (req, res) => {
             res.status(400).json({ message: 'Invalid account data' });
         }
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: 'Could not register account' });
     }
 };
 
@@ -71,7 +84,7 @@ const loginAccount = async (req, res) => {
         }
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Could not login to account' });
     }
 };
 
@@ -106,7 +119,7 @@ const updateAccount = async (req, res) => {
 
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Could not update account information' });
     }
 };
 
@@ -124,9 +137,9 @@ const deleteAccount = async (req, res) => {
         await Account.findByIdAndDelete(req.params.id);
         res.status(200).json({ message: 'Account successfully deleted' });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Could not delete account' });
     }
 };
 
 
-module.exports = { registerAccount, loginAccount, updateAccount, deleteAccount };
+module.exports = { getAccount, registerAccount, loginAccount, updateAccount, deleteAccount };
