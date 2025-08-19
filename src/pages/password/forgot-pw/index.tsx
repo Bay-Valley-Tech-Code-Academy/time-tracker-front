@@ -3,20 +3,22 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 const ForgotPassword = () => {
-    const [email, setEmail] = React.useState("");
+    const [email, setEmail] = React.useState('');
     const [isEmailSent, setIsEmailSent] = React.useState(false);
+
     const navigate = useNavigate();
 
-    const checkEmail = async (e: React.FormEvent) => {
+    const submitEmail = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
             const response = await axios.get(`http://localhost:5000/api/accounts?email=${email}`);
+            alert(response.data.message || "Email address has been found! Sending email... Press OK to read it!");
             setIsEmailSent(true);
         } catch (error: unknown) {
             if (error instanceof Error) {
-                console.error('Email not found:', error.message);
-                alert(error.message || 'Email not found. Please check your email address.');
+                console.error("Email address not found:", error.message);
+                alert(error.message || "Email address not found. Please check your email address.");
             } else {
                 console.error("An unknown error occurred:", error);
             }
@@ -25,7 +27,7 @@ const ForgotPassword = () => {
     };
 
     const handleGoToResetPage = () => {
-        navigate("/reset-password");
+        navigate("/reset-password", { state: { email } });
     };
 
     return (
@@ -37,7 +39,7 @@ const ForgotPassword = () => {
                         <p>Enter your email address and an email will be sent!</p>
                     </div>
 
-                    <form onSubmit={checkEmail}>
+                    <form onSubmit={submitEmail}>
                         <label htmlFor="email"><b>Email</b></label>
                         <input
                             type="text"
