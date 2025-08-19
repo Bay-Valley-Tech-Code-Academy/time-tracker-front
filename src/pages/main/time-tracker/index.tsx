@@ -77,8 +77,21 @@ const TimeTrackerPage = () => {
     }
   };
 
-  const handleDeleteEntry = (indexToDelete: number) => {
-    setEntries(prevEntries => prevEntries.filter((_, idx) => idx !== indexToDelete));
+  const handleDeleteEntry = async (indexToDelete: number) => {
+    const entry = entries[indexToDelete];
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/entries/${entry._id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error("Failed to delete entry");
+
+      // remove locally if successful
+      setEntries(prev => prev.filter((_, idx) => idx !== indexToDelete));
+    } catch (err) {
+      console.error("Failed to delete entry:", err);
+    }
   };
 
   return (

@@ -33,4 +33,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await TimeEntry.findByIdAndDelete(id);
+
+    if (!deleted) return res.status(404).json({ message: "Entry not found" });
+
+    res.json({ message: "Entry deleted", id });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
