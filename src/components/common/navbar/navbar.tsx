@@ -1,5 +1,5 @@
 import navbarLogoHome from "../../../assets/navbar-icons/navbar-logo-home.png";
-import navbarMyAccount from "../../../assets/navbar-icons/navbar-logo-home.png";
+import navbarMyAccount from "../../../assets/navbar-icons/navbar-my-account.png";
 import { Link } from "react-router";
 
 const Navbar = () => {
@@ -12,12 +12,24 @@ const Navbar = () => {
         </div>
       </Link>
           
-      <div className="navbar-workspace">My Workspace</div>
       <Link to="/my-account">
         <div className="navbar-right">
           <img src={navbarMyAccount} alt="my account" className="navbar-right-icon" />
+          <span>My Workspace</span>
         </div>
       </Link>
+
+      <Link to="/projects">
+        <div className="navbar-right">
+          <span>Projects</span>
+        </div>
+      </Link>
+
+      <Link to="/create-account">
+        <div className="navbar-right"></div>
+        <span>Sign Up</span>
+      </Link>
+
     </nav>
   )
 }
