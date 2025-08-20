@@ -20,7 +20,6 @@ const calculateTotalHours = (start: Date, end: Date) => {
   return Number((diffMs / (1000 * 60 * 60)).toFixed(2)); //round to hours, convert to number
 };
 
-
 const TimeTrackerTable: React.FC<TimeTrackerTableProps> = ({ entries, onDelete }) => {
   return (
     <table className="time-entry-table">

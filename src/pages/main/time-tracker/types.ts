@@ -1,10 +1,12 @@
 export interface TimeEntry {
-  summary: string;
-  project: string;
-  date: Date;       
-  startTime: Date;  
-  endTime: Date;    
-  totalHours?: number
+    _id?: string;
+    summary: string;
+    project: string;
+    date: Date;       
+    startTime: Date;  
+    endTime: Date;    
+    totalHours?: number
+    userID?: string;
 }
 
 export interface TimeTrackerFormProps {
