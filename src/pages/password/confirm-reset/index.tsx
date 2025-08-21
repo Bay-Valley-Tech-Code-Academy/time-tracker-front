@@ -43,13 +43,13 @@ const ConfirmResetPassword = () => {
             alert("Passwords do not match!");
             return;
         }
-        
+
         try {
             setLoading(true);
 
             const response = await axios.patch(`http://localhost:5000/api/accounts/${accountId}`, { password });
             alert(response.data.message || 'Password successfully reset.');
-            
+
             navigate("/");
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -58,6 +58,8 @@ const ConfirmResetPassword = () => {
             } else {
                 console.error("An unknown error occurred:", error);
             }
+        } finally {
+            setLoading(false);
         }
     }
 
