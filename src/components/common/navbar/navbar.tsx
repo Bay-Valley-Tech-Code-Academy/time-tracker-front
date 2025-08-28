@@ -1,5 +1,6 @@
 import navbarLogoHome from "../../../assets/navbar-icons/navbar-logo-home.png";
 import navbarMyAccount from "../../../assets/navbar-icons/navbar-my-account.png";
+import "../../../components/common/navbar/navbar.css";
 import { Link } from "react-router";
 
 const Navbar = () => {

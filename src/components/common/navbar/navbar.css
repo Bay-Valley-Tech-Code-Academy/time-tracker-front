@@ -1,0 +1,39 @@
+.time-tracker-navbar{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    background-color: #ff5531;
+    width: 100%;
+}
+
+.navbar-left-icon{
+    width: 40px;
+    height: 40px;
+}
+
+.navbar-right-icon{
+    width: 30px;
+    height: 30px;
+}
+
+.navbar-logo{
+    color: #fcae49;
+    font-family: sans-serif;
+    font-size: 40px;
+}
+
+.navbar-text{
+    color: #3d3d3d;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.time-tracker-navbar-left{
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+}
