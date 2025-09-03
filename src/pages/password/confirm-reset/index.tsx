@@ -52,9 +52,10 @@ const ConfirmResetPassword = () => {
 
             navigate("/");
         } catch (error: unknown) {
-            if (error instanceof Error) {
-                console.error('Password reset failed:', error.message);
-                alert(error.message || 'Password reset failed. Please try again.');
+            if (axios.isAxiosError(error) && error.response) {
+                const errorMessage = error.response.data.message || 'Password reset failed. Please try again.';
+                console.error('Password reset failed:', errorMessage);
+                alert(errorMessage);
             } else {
                 console.error("An unknown error occurred:", error);
             }

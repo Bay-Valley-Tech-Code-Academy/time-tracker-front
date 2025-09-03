@@ -22,12 +22,14 @@ const LoginPage = () => {
 
       console.log('You logged in!');
       navigate("/time-tracker");
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Login failed:", error.message);
-        alert(error.message || "Invalid email or password. Please try again.");
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const errorMessage = error.response.data.message || 'Invalid email or password. Please try again!';
+        console.error("Login failed:", errorMessage);
+        alert(errorMessage);
       } else {
         console.error("An unknown error occurred:", error);
+        alert("An unknown error occurred during login process!");
       }
     } finally {
       setLoading(false);

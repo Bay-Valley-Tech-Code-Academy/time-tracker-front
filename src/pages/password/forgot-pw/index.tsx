@@ -16,9 +16,10 @@ const ForgotPassword = () => {
             alert(response.data.message || "Email address has been found! Sending email... Press OK to read it!");
             setIsEmailSent(true);
         } catch (error: unknown) {
-            if (error instanceof Error) {
-                console.error("Email address not found:", error.message);
-                alert(error.message || "Email address not found. Please check your email address.");
+             if (axios.isAxiosError(error) && error.response) {
+                const errorMessage = error.response.data.message || 'Email address not found. Please check your email address.';
+                console.error("Email address not found:", errorMessage);
+                alert(errorMessage || "Email address not found. Please check your email address.");
             } else {
                 console.error("An unknown error occurred:", error);
             }

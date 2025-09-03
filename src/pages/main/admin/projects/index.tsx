@@ -51,9 +51,10 @@ const ProjectsPage = () => {
             setProjects([...projects, response.data]);
             closeDialog();
         } catch (error: unknown) {
-            if (error instanceof Error) {
-                console.error("Failed to create project:", error.message);
-                alert(error.message || "Failed to create project!");
+             if (axios.isAxiosError(error) && error.response) {
+                const errorMessage = error.response.data.message || 'Failed to create project!';
+                console.error("Failed to create project:", errorMessage);
+                alert(errorMessage);
             } else {
                 console.error("An unknown error occurred:", error);
             }
