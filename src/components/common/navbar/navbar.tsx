@@ -12,25 +12,27 @@ const Navbar = () => {
           <span className="navbar-logo">Logo Here</span>
         </div>
       </Link>
-          
+
+      <div className="navbar-right"> 
       <Link to="/my-account">
-        <div className="navbar-right">
+        <div>
           <img src={navbarMyAccount} alt="my account" className="navbar-right-icon" />
           <span className="navbar-text">My Workspace</span>
         </div>
       </Link>
 
       <Link to="/projects">
-        <div className="navbar-right">
+        <div>
           <span className="navbar-text">Projects</span>
         </div>
       </Link>
 
       <Link to="/create-account">
-        <div className="navbar-right">
+        <div>
           <span className="navbar-text">Sign Up</span>
         </div>
       </Link>
+      </div>   
 
     </nav>
   )
