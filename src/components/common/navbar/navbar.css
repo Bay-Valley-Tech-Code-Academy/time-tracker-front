@@ -1,7 +1,7 @@
 .time-tracker-navbar{
     display: flex;
     align-items: center;
-    gap: 2em;
+    justify-content: space-between;
     background-color: #ff5531;
     width: 100%;
 }
@@ -25,7 +25,7 @@
 .navbar-text{
     color: #3d3d3d;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .time-tracker-navbar-left{
@@ -36,4 +36,5 @@
 .navbar-right{
     display: flex;
     align-items: center;
+    gap: 2em;
 }
