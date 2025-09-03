@@ -40,9 +40,10 @@ const CreateAccountPage = () => {
       //localStorage.setItem("token", response.data.jwt);
       navigate("/my-account");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Registration failed:', error.message);
-        alert(error.message || 'Registration failed. Please try again.');
+      if (axios.isAxiosError(error) && error.response) {
+        const errorMessage = error.response.data.message || 'Registration failed. Please try again.';
+        console.error('Registration failed:', errorMessage);
+        alert(errorMessage);
       } else {
         console.error("An unknown error occurred:", error);
       }
