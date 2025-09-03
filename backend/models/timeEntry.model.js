@@ -21,14 +21,13 @@ const TimeEntrySchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  // optional: if you ever want to store totalHours directly
   totalHours: {
     type: Number,
     required: false,
   },
-  // optional: if you’re associating entries with users later
   userId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: false,
   }
 });
