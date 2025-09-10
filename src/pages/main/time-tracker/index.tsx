@@ -127,9 +127,11 @@ const TimeTrackerPage = () => {
   };
 
   return (
-    <div className="time-tracker-content">
-      <TimeTrackerForm onSubmit={handleNewEntry} />
-      <TimeTrackerTable entries={entries} onDelete={handleDeleteEntry} />
+    <div className="time-tracker-content min-h-screen bg-[#FFFFD9] flex flex-col items-center p-6">
+      <div className="w-full max-w-5xl space-y-6">
+        <TimeTrackerForm onSubmit={handleNewEntry} />
+        <TimeTrackerTable entries={entries} onDelete={handleDeleteEntry} />
+      </div>
     </div>
   );
 };

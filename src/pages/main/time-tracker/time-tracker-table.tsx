@@ -22,32 +22,32 @@ const calculateTotalHours = (start: Date, end: Date) => {
 
 const TimeTrackerTable: React.FC<TimeTrackerTableProps> = ({ entries, onDelete }) => {
   return (
-    <table className="time-entry-table">
-      <thead>
+    <table className="time-entry-table w-full border border-[#A1A1A1] rounded-lg overflow-hidden">
+      <thead className="bg-gray-200 text-left">
         <tr>
-          <th>Summary</th>
-          <th>Project</th>
-          <th>Date</th>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>Total Hours</th>
-          <th>Actions</th>
+          <th className="px-4 py-2 border border-[#A1A1A1]">Summary</th>
+          <th className="px-4 py-2 border border-[#A1A1A1]">Project</th>
+          <th className="px-4 py-2 border border-[#A1A1A1]">Date</th>
+          <th className="px-4 py-2 border border-[#A1A1A1]">Start Time</th>
+          <th className="px-4 py-2 border border-[#A1A1A1]">End Time</th>
+          <th className="px-4 py-2 border border-[#A1A1A1]">Total Hours</th>
+          <th className="px-4 py-2 border border-[#A1A1A1]">Actions</th>
         </tr>
       </thead>
       <tbody>
         {entries.map((entry, idx) => (
           <tr key={idx}>
-            <td>{entry.summary}</td>
-            <td>{entry.project}</td>
-            <td>{formatDate(entry.date)}</td>
-            <td>{formatTime(entry.startTime)}</td>
-            <td>{formatTime(entry.endTime)}</td>
-            <td>{calculateTotalHours(entry.startTime, entry.endTime)}</td>
-            <td>
-              <button className="time-tracker-table-action-button">
+            <td className="px-4 py-2 border border-[#A1A1A1]">{entry.summary}</td>
+            <td className="px-4 py-2 border border-[#A1A1A1]">{entry.project}</td>
+            <td className="px-4 py-2 border border-[#A1A1A1]">{formatDate(entry.date)}</td>
+            <td className="px-4 py-2 border border-[#A1A1A1]">{formatTime(entry.startTime)}</td>
+            <td className="px-4 py-2 border border-[#A1A1A1]">{formatTime(entry.endTime)}</td>
+            <td className="px-4 py-2 border border-[#A1A1A1]">{calculateTotalHours(entry.startTime, entry.endTime)}</td>
+            <td className="px-4 py-2 border border-[#A1A1A1]">
+              <button className="time-tracker-table-action-button px-3 py-1 rounded bg-[#FF5531] text-white hover:bg-red-600">
                 Actions
               </button>
-              <button className="time-tracker-table-delete-button" onClick={() => onDelete(idx)}>
+              <button className="time-tracker-table-delete-button px-3 py-1 rounded bg-[#FF5531] text-white hover:bg-red-600" onClick={() => onDelete(idx)}>
                 Delete
               </button>
             </td>
