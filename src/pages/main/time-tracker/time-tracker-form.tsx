@@ -43,75 +43,91 @@ const TimeTrackerForm: React.FC<TimeTrackerFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form className="time-tracker-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="summary">Summary</label>
-        <input
-          type="text"
-          id="summary"
-          name="summary"
-          value={form.summary}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
+    <form
+    className="time-tracker-form bg-[#FFFFD9] p-6 rounded-lg shadow-md space-y-4"
+    onSubmit={handleSubmit}
+  >
+    <div className="form-group flex flex-col">
+      <label htmlFor="summary" className="mb-1 font-semibold text-[#FCAE49]">
+        Summary
+      </label>
+      <input
+        type="text"
+        id="summary"
+        name="summary"
+        value={form.summary}
+        onChange={handleChange}
+        className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+      />
+    </div>
 
-      <div className="form-group">
-        <label htmlFor="project">Project</label>
-        <select
-          id="project"
-          name="project"
-          value={form.project}
-          onChange={handleChange}
-          className="form-control"
-        >
-          <option value="">Select a project</option>
-          <option value="alpha">Alpha</option>
-          <option value="beta">Beta</option>
-          <option value="gamma">Gamma</option>
-        </select>
-      </div>
+    <div className="form-group flex flex-col">
+      <label htmlFor="project" className="mb-1 font-semibold text-[#FCAE49]">
+        Project
+      </label>
+      <select
+        id="project"
+        name="project"
+        value={form.project}
+        onChange={handleChange}
+        className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+      >
+        <option value="">Select a project</option>
+        <option value="alpha">Alpha</option>
+        <option value="beta">Beta</option>
+        <option value="gamma">Gamma</option>
+      </select>
+    </div>
 
-      <div className="form-group">
-        <label htmlFor="date">Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          value={form.date}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
+    <div className="form-group flex flex-col">
+      <label htmlFor="date" className="mb-1 font-semibold text-[#FCAE49]">
+        Date
+      </label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        value={form.date}
+        onChange={handleChange}
+        className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+      />
+    </div>
 
-      <div className="form-group">
-        <label htmlFor="startTime">Start Time</label>
-        <input
-          type="time"
-          id="startTime"
-          name="startTime"
-          value={form.startTime}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
+    <div className="form-group flex flex-col">
+      <label htmlFor="startTime" className="mb-1 font-semibold text-[#FCAE49]">
+        Start Time
+      </label>
+      <input
+        type="time"
+        id="startTime"
+        name="startTime"
+        value={form.startTime}
+        onChange={handleChange}
+        className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+      />
+    </div>
 
-      <div className="form-group">
-        <label htmlFor="endTime">End Time</label>
-        <input
-          type="time"
-          id="endTime"
-          name="endTime"
-          value={form.endTime}
-          onChange={handleChange}
-          className="form-control"
-        />
-      </div>
+    <div className="form-group flex flex-col">
+      <label htmlFor="endTime" className="mb-1 font-semibold text-[#FCAE49]">
+        End Time
+      </label>
+      <input
+        type="time"
+        id="endTime"
+        name="endTime"
+        value={form.endTime}
+        onChange={handleChange}
+        className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+      />
+    </div>
 
-      <Button type="submit" className="submit-button">
-        Submit
-      </Button>
-    </form>
+    <Button
+      type="submit"
+      className="submit-button bg-[#FF5531] text-white font-bold py-2 px-4 rounded hover:bg-[#e04a27]"
+    >
+      Submit
+    </Button>
+  </form>
   );
 };
 
