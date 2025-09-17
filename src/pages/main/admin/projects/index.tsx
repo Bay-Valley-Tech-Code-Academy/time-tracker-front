@@ -27,8 +27,18 @@ const ProjectsPage = () => {
     React.useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/projects");
-                setProjects(response.data);
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    console.error("No token found. Please log in!");
+                    return;
+                }
+
+                const response = await axios.get('http://localhost:5000/api/projects', {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }); setProjects(response.data);
             } catch (error) {
                 console.error("Failed to fetch projects:", error);
             }
@@ -43,15 +53,27 @@ const ProjectsPage = () => {
         try {
             setLoading(true);
 
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error("No token found. Please log in!");
+                return;
+            }
+
             const response = await axios.post("http://localhost:5000/api/projects/create", {
                 name: projectName,
                 trackedHours: 0
-            });
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            );
 
             setProjects([...projects, response.data]);
             closeDialog();
         } catch (error: unknown) {
-             if (axios.isAxiosError(error) && error.response) {
+            if (axios.isAxiosError(error) && error.response) {
                 const errorMessage = error.response.data.message || 'Failed to create project!';
                 console.error("Failed to create project:", errorMessage);
                 alert(errorMessage);

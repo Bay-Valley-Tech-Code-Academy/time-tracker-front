@@ -57,6 +57,7 @@ const TimeTrackerPage = () => {
       date: entry.date.toISOString(),
       startTime: entry.startTime.toISOString(),
       endTime: entry.endTime.toISOString(),
+      totalHours: entry.totalHours,
     };
 
     console.log("Sending entry to backend:", JSON.stringify(entryForBackend, null, 2));

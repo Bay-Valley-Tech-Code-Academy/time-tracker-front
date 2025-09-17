@@ -15,7 +15,7 @@ router.get("/", protect, async (req, res) => {
 const Test_User_ID = "68752a89652be6a1c8cf95e8";
 router.post("/", protect, async (req, res) => {
   try {
-    const { summary, project, date, startTime, endTime } = req.body;
+    const { summary, project, date, startTime, endTime, totalHours } = req.body;
 
     const newEntry = new TimeEntry({
       summary,
@@ -23,6 +23,7 @@ router.post("/", protect, async (req, res) => {
       date,
       startTime,
       endTime,
+      totalHours,
       userId: req.user._id || Test_User_ID
     });
 

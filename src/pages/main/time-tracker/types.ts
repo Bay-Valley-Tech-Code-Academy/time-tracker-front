@@ -17,3 +17,8 @@ export interface TimeTrackerTableProps {
     entries: TimeEntry[];
     onDelete: (index: number) => void;
 }
+
+export interface Project {
+  _id: string;
+  name: string;
+}
