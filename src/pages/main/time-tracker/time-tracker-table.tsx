@@ -22,39 +22,60 @@ const calculateTotalHours = (start: Date, end: Date) => {
 
 const TimeTrackerTable: React.FC<TimeTrackerTableProps> = ({ entries, onDelete }) => {
   return (
-    <table className="time-entry-table w-full border border-[#A1A1A1] rounded-lg overflow-hidden">
-      <thead className="bg-gray-200 text-left">
-        <tr>
-          <th className="px-4 py-2 border border-[#A1A1A1]">Summary</th>
-          <th className="px-4 py-2 border border-[#A1A1A1]">Project</th>
-          <th className="px-4 py-2 border border-[#A1A1A1]">Date</th>
-          <th className="px-4 py-2 border border-[#A1A1A1]">Start Time</th>
-          <th className="px-4 py-2 border border-[#A1A1A1]">End Time</th>
-          <th className="px-4 py-2 border border-[#A1A1A1]">Total Hours</th>
-          <th className="px-4 py-2 border border-[#A1A1A1]">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {entries.map((entry, idx) => (
-          <tr key={idx}>
-            <td className="px-4 py-2 border border-[#A1A1A1]">{entry.summary}</td>
-            <td className="px-4 py-2 border border-[#A1A1A1]">{entry.project}</td>
-            <td className="px-4 py-2 border border-[#A1A1A1]">{formatDate(entry.date)}</td>
-            <td className="px-4 py-2 border border-[#A1A1A1]">{formatTime(entry.startTime)}</td>
-            <td className="px-4 py-2 border border-[#A1A1A1]">{formatTime(entry.endTime)}</td>
-            <td className="px-4 py-2 border border-[#A1A1A1]">{calculateTotalHours(entry.startTime, entry.endTime)}</td>
-            <td className="px-4 py-2 border border-[#A1A1A1]">
-              <button className="time-tracker-table-action-button px-3 py-1 rounded bg-[#FF5531] text-white hover:bg-red-600">
+    <div className="time-entries-container space-y-4 bg-[#a1a1a1] p-6 rounded-xl">
+      <h2 className="text-2xl font-bold text-center text-black mb-4">Previous Time Entries</h2>
+
+      {entries.map((entry, idx) => (
+        <div
+          key={idx}
+          className="bg-[#FCAE49] border border-gray-400 rounded-lg shadow-md p-4 flex flex-col gap-4"
+        >
+          {/* Top row: Project & Summary */}
+          <div className="flex flex-col sm:flex-row justify-between gap-4">
+            <div className="flex-1 border border-gray-400 rounded-lg text-center">
+              <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Project</div>
+              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{entry.project}</div>
+            </div>
+            <div className="flex-1 border border-gray-400 rounded-lg text-center">
+              <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Summary</div>
+              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{entry.summary}</div>
+            </div>
+          </div>
+
+          {/* Bottom row: Date, Start/End, Total Hours, Actions */}
+          <div className="flex flex-col sm:flex-row justify-between gap-4">
+            <div className="flex-1 border border-gray-400 rounded-lg text-center">
+              <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Date</div>
+              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{formatDate(entry.date)}</div>
+            </div>
+
+            <div className="flex-1 border border-gray-400 rounded-lg text-center">
+              <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Start Time / End Time</div>
+              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">
+                {formatTime(entry.startTime)} / {formatTime(entry.endTime)}
+              </div>
+            </div>
+
+            <div className="flex-1 border border-gray-400 rounded-lg text-center">
+              <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Total Hours</div>
+              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{calculateTotalHours(entry.startTime, entry.endTime)}</div>
+            </div>
+
+            <div className="flex flex-col gap-2 items-center flex-1">
+              <button className="bg-[#FF5531] text-white px-3 py-1 rounded hover:bg-red-600 max-w-[120px]">
                 Actions
               </button>
-              <button className="time-tracker-table-delete-button px-3 py-1 rounded bg-[#FF5531] text-white hover:bg-red-600" onClick={() => onDelete(idx)}>
+              <button
+                className="bg-[#FF5531] text-white px-3 py-1 rounded hover:bg-red-600 max-w-[120px]"
+                onClick={() => onDelete(idx)}
+              >
                 Delete
               </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

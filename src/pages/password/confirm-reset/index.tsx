@@ -65,12 +65,16 @@ const ConfirmResetPassword = () => {
     }
 
     return (
-        <div>
-            <h2>Reset Password</h2>
+        <div className="min-h-screen flex items-center justify-center bg-[#FFFFD9]">
+            <div className="w-full max-w-md p-8 rounded-xl shadow-lg bg-[#FCAE49]">
+                <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Reset Password</h2>
 
-            <form onSubmit={submitPassword}>
-                <label htmlFor="psw"><b>Password</b></label>
-                <input
+                <form onSubmit={submitPassword} className="space-y-4">
+                <div>
+                    <label htmlFor="psw" className="block font-semibold text-gray-900 mb-1">
+                    Password
+                    </label>
+                    <input
                     type="password"
                     placeholder="Enter Password"
                     name="psw"
@@ -78,10 +82,15 @@ const ConfirmResetPassword = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                />
+                    className="w-full p-2 border border-[#A1A1A1] rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF5531]"
+                    />
+                </div>
 
-                <label htmlFor="psw-confirm"><b>Confirm Password</b></label>
-                <input
+                <div>
+                    <label htmlFor="psw-confirm" className="block font-semibold text-gray-900 mb-1">
+                    Confirm Password
+                    </label>
+                    <input
                     type="password"
                     placeholder="Confirm Password"
                     name="psw-confirm"
@@ -89,14 +98,19 @@ const ConfirmResetPassword = () => {
                     value={conPass}
                     onChange={(e) => setConPass(e.target.value)}
                     required
-                />
+                    className="w-full p-2 border border-[#A1A1A1] rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF5531]"
+                    />
+                </div>
+
                 <button
                     type="submit"
                     disabled={loading}
+                    className="w-full py-2 rounded-md bg-[#FF5531] text-white font-semibold shadow-md hover:bg-[#e14a28] disabled:opacity-50"
                 >
                     {loading ? "Resetting..." : "Reset Password"}
                 </button>
-            </form>
+                </form>
+            </div>
         </div>
     );
 };

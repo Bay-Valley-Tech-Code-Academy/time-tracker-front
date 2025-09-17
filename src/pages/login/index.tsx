@@ -37,45 +37,48 @@ const LoginPage = () => {
   }
 
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="min-h-screen flex items-center justify-center bg-[#FFFFD9]">
+      <div className="w-full max-w-md p-8 rounded-xl shadow-lg bg-[#FCAE49]">
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Login Page</h1>
 
-      <form onSubmit={submitLogin}>
-        <div>
-          <div style={{ marginBottom: '1rem' }}>
-            <label htmlFor="email">Email:</label><br />
+        <form onSubmit={submitLogin} className="space-y-4">
+          <div>
+            <label htmlFor="email" className="block font-medium text-gray-900 mb-1">
+              Email:
+            </label>
             <input
               type="text"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="w-full px-3 py-2 rounded-md border border-gray-300 bg-[#A1A1A1] text-black placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF5531]"
             />
           </div>
-        </div>
 
-        <div>
-          <div style={{ marginBottom: '1rem' }}>
-            <label htmlFor="password">Password:</label><br />
+          <div>
+            <label htmlFor="password" className="block font-medium text-gray-900 mb-1">
+              Password:
+            </label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className="w-full px-3 py-2 rounded-md border border-gray-300 bg-[#A1A1A1] text-black placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF5531]"
             />
           </div>
-        </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Logging in..." : "Log In"}
-        </button>
-      </form>
-
-
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2 px-4 rounded-md bg-[#FF5531] text-white font-semibold shadow-md hover:bg-[#e14a28] disabled:opacity-50"
+          >
+            {loading ? "Logging in..." : "Log In"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
