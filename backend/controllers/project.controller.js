@@ -1,15 +1,38 @@
 const Project = require('../models/project.model')
+const TimeEntry = require('../models/timeEntry.model');
 
 //@desc    Get projects
 //@route   GET /api/v1/projects
 //@access  Public
 const getProject = async (req, res) => {
     try {
-        const { name } = req.query;
-        const query = name ? { name } : {};
+        const projects = await Project.find({ userId: req.user._id });
 
-        const projects = await Project.find(query);
-        res.status(200).json(projects);
+        const getProjectHours = await Promise.all(projects.map(async (project) => {
+            const timeEntries = await TimeEntry.find({
+                project: project._id,
+                userId: req.user._id
+            });
+
+            const totalTrackedHours = timeEntries.reduce(
+                (sum, entry) => sum + (entry.totalHours || 0),
+                0
+            );
+
+            await Project.findByIdAndUpdate(
+                project._id,
+                { trackedHours: totalTrackedHours }
+            );
+
+            return {
+                ...project.toObject(),
+                trackedHours: totalTrackedHours
+            };
+        }));
+
+        res.status(200).json(getProjectHours);
+
+
     } catch (error) {
         res.status(500).json({ message: 'Unable to get project.' });
     }
@@ -23,21 +46,18 @@ const createProject = async (req, res) => {
         const { name, trackedHours } = req.body;
 
         // Prevents users from using the same name for their projects
-        const projectExists = await Project.findOne({ name });
+        /*const projectExists = await Project.findOne({ name });
         if (projectExists) {
             return res.status(400).json({ message: 'Project with the same name already exists!' });
-        }
+        }*/
 
         const project = await Project.create({
             name,
-            trackedHours
+            trackedHours,
+            userId: req.user._id
         });
 
-        if (project) {
-            res.status(201).json(project);
-        } else {
-            res.status(400).json({ message: 'There is invalid project data!' });
-        }
+        res.status(201).json(project);
     } catch (error) {
         res.status(500).json({ message: 'Unable to create project.' });
     }

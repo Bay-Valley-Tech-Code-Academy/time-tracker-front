@@ -9,6 +9,11 @@ const projectSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Account',
+        required: true,
+    },
 });
 
 module.exports = mongoose.model('Project', projectSchema);

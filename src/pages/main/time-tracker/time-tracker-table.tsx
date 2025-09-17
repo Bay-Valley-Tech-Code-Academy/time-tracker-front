@@ -1,5 +1,6 @@
 import React from "react";
-import type { TimeTrackerTableProps } from "./types";
+import type { TimeTrackerTableProps, Project } from "./types";
+import axios from "axios";
 
 const formatDate = (date: Date) =>
   date.toLocaleDateString("en-US", {
@@ -21,6 +22,37 @@ const calculateTotalHours = (start: Date, end: Date) => {
 };
 
 const TimeTrackerTable: React.FC<TimeTrackerTableProps> = ({ entries, onDelete }) => {
+  const [projectMap, setProjectMap] = React.useState<Record<string, string>>({});
+
+  React.useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.error("No token found. User may not be logged in.");
+          return;
+        }
+
+        const response = await axios.get("http://localhost:5000/api/projects", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const map: Record<string, string> = {};
+        response.data.forEach((project: Project) => {
+          map[project._id] = project.name;
+        });
+        setProjectMap(map);
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+  
   return (
     <div className="time-entries-container space-y-4 bg-[#a1a1a1] p-6 rounded-xl">
       <h2 className="text-2xl font-bold text-center text-black mb-4">Previous Time Entries</h2>
