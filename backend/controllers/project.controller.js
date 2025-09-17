@@ -1,4 +1,5 @@
 const Project = require('../models/project.model')
+const TimeEntry = require('../models/timeEntry.model');
 
 //@desc    Get projects
 //@route   GET /api/v1/projects
@@ -6,7 +7,32 @@ const Project = require('../models/project.model')
 const getProject = async (req, res) => {
     try {
         const projects = await Project.find({ userId: req.user._id });
-        res.status(200).json(projects);
+
+        const getProjectHours = await Promise.all(projects.map(async (project) => {
+            const timeEntries = await TimeEntry.find({
+                project: project._id,
+                userId: req.user._id
+            });
+
+            const totalTrackedHours = timeEntries.reduce(
+                (sum, entry) => sum + (entry.totalHours || 0),
+                0
+            );
+
+            await Project.findByIdAndUpdate(
+                project._id,
+                { trackedHours: totalTrackedHours }
+            );
+
+            return {
+                ...project.toObject(),
+                trackedHours: totalTrackedHours
+            };
+        }));
+
+        res.status(200).json(getProjectHours);
+
+
     } catch (error) {
         res.status(500).json({ message: 'Unable to get project.' });
     }
