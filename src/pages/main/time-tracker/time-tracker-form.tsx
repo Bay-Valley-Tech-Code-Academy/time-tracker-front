@@ -84,96 +84,113 @@ const TimeTrackerForm: React.FC<TimeTrackerFormProps> = ({ onSubmit }) => {
 
   return (
     <form
-      className="time-tracker-form bg-[#FFFFD9] p-6 rounded-lg shadow-md space-y-4"
+      className="time-tracker-container bg-[#a1a1a1] p-6 rounded-xl space-y-4"
       onSubmit={handleSubmit}
     >
-      <div className="form-group flex flex-col">
-        <label htmlFor="summary" className="mb-1 font-semibold text-[#FCAE49]">
-          Summary
-        </label>
-        <input
-          type="text"
-          id="summary"
-          name="summary"
-          value={form.summary}
-          onChange={handleChange}
-          className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
-        />
-      </div>
+      <h2 className="text-2xl font-bold text-center text-black mb-4">
+        Create New Time Entry
+      </h2>
 
-      <div className="form-group flex flex-col">
-        <label htmlFor="project" className="mb-1 font-semibold text-[#FCAE49]">
-          Project
-        </label>
-        <select
-          id="project"
-          name="project"
-          value={form.project}
-          onChange={handleChange}
-          className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
-          disabled={loading}
-        >
-          <option value="">Select a project</option>
-          {projects.map((project) => (
-            <option key={project._id} value={project._id}>
-              {project.name}
-            </option>
-          ))}
-        </select>
-        {loading && <p className="text-sm text-gray-500">Loading projects...</p>}
-        {!loading && projects.length === 0 && (
-          <p className="text-sm text-red-500">No projects available. Please create a project first.</p>
-        )}
-      </div>
+      {/* Form Card */}
+      <div className="bg-[#FCAE49] border border-gray-400 rounded-lg shadow-md p-6 space-y-4">
+        {/* Summary */}
+        <div className="border border-gray-400 rounded-lg text-center">
+          <div className="bg-[#FFCB7D] font-semibold p-1 rounded-t-lg">Summary</div>
+          <div className="bg-[#FCAE49] p-2 rounded-b-lg flex justify-center">
+            <input
+              type="text"
+              id="summary"
+              name="summary"
+              value={form.summary}
+              onChange={handleChange}
+              className="w-full text-center border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+            />
+          </div>
+        </div>
 
-      <div className="form-group flex flex-col">
-        <label htmlFor="date" className="mb-1 font-semibold text-[#FCAE49]">
-          Date
-        </label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          value={form.date}
-          onChange={handleChange}
-          className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
-        />
-      </div>
+        {/* Project */}
+        <div className="border border-gray-400 rounded-lg text-center">
+          <div className="bg-[#FFCB7D] font-semibold p-1 rounded-t-lg">Project</div>
+          <div className="bg-[#FCAE49] p-2 rounded-b-lg flex justify-center">
+            <select
+              id="project"
+              name="project"
+              value={form.project}
+              onChange={handleChange}
+              className="w-full text-center border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+              disabled={loading}
+            >
+              <option value="">Select a project</option>
+              {projects.map((project) => (
+                <option key={project._id} value={project._id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          {loading && <p className="text-sm text-gray-500 mt-1 text-center">Loading projects...</p>}
+          {!loading && projects.length === 0 && (
+            <p className="text-sm text-red-500 mt-1 text-center">
+              No projects available. Please create a project first.
+            </p>
+          )}
+        </div>
 
-      <div className="form-group flex flex-col">
-        <label htmlFor="startTime" className="mb-1 font-semibold text-[#FCAE49]">
-          Start Time
-        </label>
-        <input
-          type="time"
-          id="startTime"
-          name="startTime"
-          value={form.startTime}
-          onChange={handleChange}
-          className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
-        />
-      </div>
+        {/* Date */}
+        <div className="border border-gray-400 rounded-lg text-center">
+          <div className="bg-[#FFCB7D] font-semibold p-1 rounded-t-lg">Date</div>
+          <div className="bg-[#FCAE49] p-2 rounded-b-lg flex justify-center">
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={form.date}
+              onChange={handleChange}
+              className="w-full text-center border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+            />
+          </div>
+        </div>
 
-      <div className="form-group flex flex-col">
-        <label htmlFor="endTime" className="mb-1 font-semibold text-[#FCAE49]">
-          End Time
-        </label>
-        <input
-          type="time"
-          id="endTime"
-          name="endTime"
-          value={form.endTime}
-          onChange={handleChange}
-          className="form-control border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
-        />
-      </div>
+        {/* Start Time */}
+        <div className="border border-gray-400 rounded-lg text-center">
+          <div className="bg-[#FFCB7D] font-semibold p-1 rounded-t-lg">Start Time</div>
+          <div className="bg-[#FCAE49] p-2 rounded-b-lg flex justify-center">
+            <input
+              type="time"
+              id="startTime"
+              name="startTime"
+              value={form.startTime}
+              onChange={handleChange}
+              className="w-full text-center border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+            />
+          </div>
+        </div>
 
-      <Button
-        type="submit"
-        className="submit-button bg-[#FF5531] text-white font-bold py-2 px-4 rounded hover:bg-[#e04a27]"
-      >
-        Submit
-      </Button>
+        {/* End Time */}
+        <div className="border border-gray-400 rounded-lg text-center">
+          <div className="bg-[#FFCB7D] font-semibold p-1 rounded-t-lg">End Time</div>
+          <div className="bg-[#FCAE49] p-2 rounded-b-lg flex justify-center">
+            <input
+              type="time"
+              id="endTime"
+              name="endTime"
+              value={form.endTime}
+              onChange={handleChange}
+              className="w-full text-center border border-gray-400 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#FCAE49]"
+            />
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <div className="flex justify-center">
+          <Button
+            type="submit"
+            className="submit-button bg-[#FF5531] text-white font-bold py-2 px-4 rounded hover:bg-[#e04a27]"
+          >
+            Submit
+          </Button>
+        </div>
+      </div>
     </form>
   );
 };
