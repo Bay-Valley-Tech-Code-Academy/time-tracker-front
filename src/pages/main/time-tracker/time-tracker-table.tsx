@@ -66,7 +66,7 @@ const TimeTrackerTable: React.FC<TimeTrackerTableProps> = ({ entries, onDelete }
           <div className="flex flex-col sm:flex-row justify-between gap-4">
             <div className="flex-1 border border-gray-400 rounded-lg text-center">
               <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Project</div>
-              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{entry.project}</div>
+              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{projectMap[entry.project] || entry.project} </div>
             </div>
             <div className="flex-1 border border-gray-400 rounded-lg text-center">
               <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Summary</div>
@@ -90,7 +90,7 @@ const TimeTrackerTable: React.FC<TimeTrackerTableProps> = ({ entries, onDelete }
 
             <div className="flex-1 border border-gray-400 rounded-lg text-center">
               <div className="bg-[#FCAE49] font-semibold p-1 rounded-t-lg">Total Hours</div>
-              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{calculateTotalHours(entry.startTime, entry.endTime)}</div>
+              <div className="bg-[#FFCB7D] p-2 rounded-b-lg">{entry.totalHours ?? calculateTotalHours(entry.startTime, entry.endTime)}</div>
             </div>
 
             <div className="flex flex-col gap-2 items-center flex-1">
