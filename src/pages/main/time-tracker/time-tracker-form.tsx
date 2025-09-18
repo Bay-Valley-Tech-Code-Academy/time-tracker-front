@@ -83,7 +83,10 @@ const TimeTrackerForm: React.FC<TimeTrackerFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <div className="time-tracker-container bg-[#a1a1a1] p-6 rounded-xl space-y-4">
+    <form
+      className="time-tracker-container bg-[#a1a1a1] p-6 rounded-xl space-y-4"
+      onSubmit={handleSubmit}
+    >
       <h2 className="text-2xl font-bold text-center text-black mb-4">
         Create New Time Entry
       </h2>
@@ -188,7 +191,7 @@ const TimeTrackerForm: React.FC<TimeTrackerFormProps> = ({ onSubmit }) => {
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
