@@ -6,6 +6,8 @@ body {
   color: darkorange;
   background-color: dimgray;
   background-image: url(https://img.freepik.com/free-vector/evening-cloudy-sky-purple-background-with-group-cumulus-cirrus-clouds-flat-cartoon-illustration_1284-62768.jpg);
+  background-repeat: no-repeat;
+  background-size: 150% 270% 180%;
 }
 
 h1 {
