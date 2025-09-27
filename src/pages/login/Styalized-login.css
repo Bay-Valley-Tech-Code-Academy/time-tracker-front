@@ -1,0 +1,14 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  border: 3px solid orangered;
+  justify-content: center;
+  color: darkorange;
+  background-color: dimgray;
+
+}
+
+h1 {
+  text-align: center;
+
+}
